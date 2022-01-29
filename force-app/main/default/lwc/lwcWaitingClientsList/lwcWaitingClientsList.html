@@ -1,0 +1,47 @@
+<template>
+    <lightning-card>
+        <template if:true={clients}>
+            <div class="slds-grid slds-grid_vertical">
+                <div class="slds-col slds-box slds-p-around_medium slds-text-align_center">
+                    <div class="slds-grid">
+                        <div class="slds-col slds-size_1-of-4">
+                            Client Name:
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            Files:
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+                            Priority:
+                        </div>
+                        <div class="slds-col slds-size_1-of-4">
+
+                        </div>
+                    </div>
+                </div>
+                <template for:each={clients} for:item="client">
+                    <div key={client.Id}  class="slds-col slds-box slds-p-around_medium slds-text-align_center">
+                        <div class="slds-grid">
+                            <div class="slds-col slds-size_1-of-4">
+                                {client.Name} (waiting time: {client.WaitingTime__c})
+                            </div>
+                            <div class="slds-col slds-size_1-of-4">
+                                <template if:true={client.Files__r}>
+                                    <template for:each={client.Files__r.records} for:item="file">
+                                        <p key={file.Id}>{file.Name} (size: {file.Size__c})</p>
+                                    </template>
+                                </template>
+                            </div>
+                            <div class="slds-col slds-size_1-of-4">
+                                {client.Priority__c}
+                            </div>
+                            <div class="slds-col slds-size_1-of-4">
+                                <c-lwc-client-buttons client-id={client.Id} onrefresh={refresh}></c-lwc-client-buttons>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </lightning-card>
+</template>

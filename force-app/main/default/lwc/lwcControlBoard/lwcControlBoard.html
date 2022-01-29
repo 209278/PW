@@ -1,0 +1,16 @@
+<template>
+    <lightning-card>
+        <template if:true={config}>
+            <div class="slds-box slds-p-around_medium slds-text-align_center">
+                <template if:false={config.isSystemActive__c}>
+                    <lightning-button label="Start" onclick={handleStartClick} ></lightning-button>
+                    <lightning-button label="Stop" disabled ></lightning-button>
+                </template>
+                <template if:true={config.isSystemActive__c}>
+                    <lightning-button label="Start" disabled ></lightning-button>
+                    <lightning-button label="Stop" onclick={handleStopClick}></lightning-button>
+                </template>
+            </div>
+        </template>
+    </lightning-card>
+</template>
